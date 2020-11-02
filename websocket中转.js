@@ -1,5 +1,3 @@
-
-```js
 const WServer = require('ws').Server
 const Websocket = require('ws')
 const conf = require('../config/index')(process.env.NODE_ENV) // 根据环境获取不同的websocketURL
@@ -40,4 +38,3 @@ function webSocketServer(server) {
 }
 
 module.exports = webSocketServer
-```
