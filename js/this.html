@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        function foo () {
+            console.log(this.a)
+        }
+        var obj = {
+            a: 2,
+            foo: foo
+        }
+
+        var other = {
+            a: 33,
+            obj: obj
+        }
+
+        var a = '123'
+
+        
+        obj.foo() // 2 当函数引用拥有上下文时，this绑定会默认绑定在这个上下文对象上，但是对象属性引用链只有上一层或者说最后一层在调用位置中起作用。
+        other.obj.foo() // 2 this会绑定obj对象。
+        
+        // this 隐式丢失
+        
+        var bar = obj.foo // 123 函数别名 会导致this 隐式丢失
+        bar()
+
+        function useFoo (fn) { // 将函数作为回调函数传递 也会造成this隐式丢失
+            fn()
+        }
+        useFoo(obj.foo) // 123
+
+        setTimeout(obj.foo, 100) // 将函数赋值给js内置函数， 也会造成this隐式丢失
+
+
+
+        function _new (fn) {
+            var obj = Object.create(fn.prototype)
+            fn.apply(obj, Array.prototype.slice.call(arguments, 1))
+            return obj
+        }
+        function Person (name) {
+            this.name = name
+        }
+        var p1 = _new(Person, '小明')
+        console.log(p1)
+        </script>
+</body>
+</html>
