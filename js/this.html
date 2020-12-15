@@ -51,6 +51,43 @@
         }
         var p1 = _new(Person, '小明')
         console.log(p1)
+
+
+        function Animal () {
+            console.log(this.name)
+        }
+        var dog = {
+            name: 'dog',
+            sayName: Animal
+        }
+        var cat = {
+            name: 'cat',
+            sayName: Animal
+        }
+        // var otherAnimal = function () {
+        //     Animal.call(dog)
+        // }
+        // otherAnimal.bind(cat)
+        var otheraaa = Animal.bind(dog)
+        otheraaa.call(cat)
         </script>
+
+
+<script>
+
+    function SuperType () {
+        this.property = false
+    }
+    SuperType.prototype.getProperty = function () {
+        return this.property
+    }
+    function SubType () {
+        this.property = true
+    }
+    SubType.prototype = new SuperType()
+    SubType.prototype.constructor = SubType
+    var instance = new SubType()
+    console.log(instance)
+</script>
 </body>
 </html>

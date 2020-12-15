@@ -146,7 +146,7 @@ this的绑定是在运行时绑定的不是在编写的时候，他的上下文�
    Foo.apply(obj) // demoFoo
    ```
 
-   然而call和apply还不能解决this隐世丢失的问题, 个人见解是call和apply会直接应用this调用函数。
+   然而call和apply还不能解决this隐世丢失的问题, 个人见解是call和apply会绑定this并立即调用函数。此时我们还可以更改this的指向。
 
    解决this隐世丢失的方法，bind
 
@@ -167,5 +167,35 @@ this的绑定是在运行时绑定的不是在编写的时候，他的上下文�
 
    
 
-4. new绑定
+4. new绑定, 优先级最高
 
+   ```js
+   function Person () {
+       console.log(this.name)
+   }
+   var obj = {
+       name: 'person1'
+   }
+   var obj2 = {
+       name: 'person2'
+   }
+   var p1 = new Person
+   p1.name = 'person3'
+   ```
+
+### 优先级比较
+
+new 绑定 >  显示绑定 （call、apply、bind） > 隐式绑定 （上下文对象） > 默认绑定 （window || null）
+
+
+
+## 总结
+
+找this绑定
+
+1. 先找函数究竟在那里被调用；
+2. 根据this的绑定规则寻找this绑定；
+3. 如果有new 绑定就指向new 前面的实例对象；
+4. 如果有显示绑定，就指向显示绑定的对象；
+5. 如果有上下文对象，就指向上下文对象；
+6. 都不存在，使用默认绑定，指向window，严格模式下，指向null；
