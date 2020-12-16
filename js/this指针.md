@@ -15,7 +15,7 @@ this的绑定是在运行时绑定的不是在编写的时候，他的上下文�
        console.log(this.name)
    }
    var name = '123'
-   Foo() // name   this => window
+   Foo() // 123   this => window
    ```
 
 2. 隐式绑定
