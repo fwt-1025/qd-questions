@@ -56,3 +56,39 @@ function mpSort (arr) { // 冒泡排序
 
 第一种排序是自己想的，感觉跟冒泡排序差不多， 性能跟冒泡排序差不多，希尔排序是最好的，性能是最佳的。
 
+### 数组去重的方法
+
+```js
+function duplicateArray (arr) {
+    let result = []
+    arr.forEach((item, index) => {
+        if (!result.includes(item)) {
+            result.push(item)
+        }
+    })
+    return result
+}
+duplicateArray(2, 3,4, 2, 6, 5]) // 对象不能去重
+
+
+// 使用reduce + includes
+function duplicateArray (arr) {
+   return arr.reduce((prev, cur) => prev.includes(cur) ? prev : [...prev, cur], [])
+} // 对象不能去重
+
+
+// ES6
+[...new Set(arr)] // 引用类型以及基本类型都可以去重
+
+
+// hasOwnProperty
+function duplicateArray (arr) {
+    let obj = {}
+    return arr.filter((item, index) => {
+        console.log(typeof item + item)
+        return obj.hasOwnProperty(typeof item + JSON.stringify(item)) ? false : obj[typeof item + JSON.stringify(item)] = true
+    })
+}
+duplicateArray([1,2,3,4,{name: '234'},{name:'123'}, {name: '123'}, {name: '234'}, 1, 2, 5, '1', '2', '3','1', 'a', 'b', 'c', 'c', 'e', 'd'])
+```
+
