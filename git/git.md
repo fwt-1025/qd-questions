@@ -59,3 +59,5 @@
   > git reset --hard <commitId>
   >
   > 将代码回退到某个版本，--hard 强制重置，本地修改的代码会丢失。不到万不得已，最好不要使用。
+  
+- `git config --global core.quotepath false`    解决git中文文件名乱码的情况
