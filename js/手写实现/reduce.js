@@ -1,4 +1,4 @@
-Array.prototype.myReduce = function (fn, initialValue, index, array) {
+Array.prototype.myReduce = function (fn, initialValue) {
     if (Object.prototype.toString.call(this) === '[object Array]' && typeof fn === 'function') {
         let startIndex = initialValue ? 0 : 1
         let prev = initialValue || this[0]
@@ -11,7 +11,7 @@ Array.prototype.myReduce = function (fn, initialValue, index, array) {
     }
 }
 
-Array.prototype.myReduceRight = function (fn, initialValue, index, array) {
+Array.prototype.myReduceRight = function (fn, initialValue) {
     if (Object.prototype.toString.call(this) === '[object Array]' && typeof fn === 'function') {
         let startIndex = initialValue ? this.length - 1 : this.length - 2
         let prev = initialValue || this[this.length - 1]
